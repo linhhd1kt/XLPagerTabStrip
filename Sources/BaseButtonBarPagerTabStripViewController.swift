@@ -24,7 +24,7 @@
 
 import Foundation
 
-open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollectionViewCell>: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollectionViewCell>: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     public var settings = ButtonBarPagerTabStripSettings()
     public var buttonBarItemSpec: ButtonBarItemSpec<ButtonBarCellType>!
@@ -194,14 +194,13 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollect
     }
 
     // MARK: - UICollectionViewDelegateFlowLayut
-
-    @objc open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        guard let cellWidthValue = cachedCellWidths?[indexPath.row] else {
-            fatalError("cachedCellWidths for \(indexPath.row) must not be nil")
-        }
-        return CGSize(width: cellWidthValue, height: collectionView.frame.size.height)
+  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    guard let cellWidthValue = cachedCellWidths?[indexPath.row] else {
+      fatalError("cachedCellWidths for \(indexPath.row) must not be nil")
     }
+    return CGSize(width: cellWidthValue, height: collectionView.frame.size.height)
 
+  }
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.item != currentIndex else { return }
 
