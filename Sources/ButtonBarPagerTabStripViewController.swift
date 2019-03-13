@@ -408,6 +408,6 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     }
 
     private var shouldUpdateButtonBarView = true
-    private var collectionViewDidLoad = false
+    private var collectionViewDidLoad = true
 
 }
